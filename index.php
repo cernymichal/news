@@ -1,10 +1,12 @@
 <?php
 
-require_once "./php/db.php";
+require_once "./php/Application.php";
+Application::init();
 
-$stmt = $conn->prepare("select * from article order by created_at desc limit 5");
-$stmt->execute();
-$articles = $stmt->fetchAll();
+$db = new Database();
+$ar = new ArticleRepository($db);
+
+$articles = $ar->getArticles();
 
 ?>
 
@@ -13,11 +15,11 @@ $articles = $stmt->fetchAll();
 
 <head>
   <title>Clean Blog - Start Bootstrap Theme</title>
-  <?php require "./php/head.php"; ?>
+  <?php include "./php/partials/head.php"; ?>
 </head>
 
 <body>
-  <?php require "./php/navigation.php"; ?>
+  <?php include "./php/partials/navigation.php"; ?>
 
   <!-- Page Header -->
   <header class="masthead" style="background-image: url('img/home-bg.jpg')">
@@ -61,9 +63,9 @@ $articles = $stmt->fetchAll();
 
   <hr>
 
-  <?php require "./php/footer.php"; ?>
+  <?php include "./php/partials/footer.php"; ?>
 
-  <?php require "./php/scripts.php"; ?>
+  <?php include "./php/partials/scripts.php"; ?>
 </body>
 
 </html>

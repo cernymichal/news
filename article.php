@@ -1,15 +1,17 @@
 <?php
 
+require_once "./php/Application.php";
+Application::init();
+
 if (empty($_GET["id"])) {
   header("Location: index.php");
   die();
 }
 
-require_once "./php/db.php";
+$db = new Database();
+$ar = new ArticleRepository($db);
 
-$stmt = $conn->prepare("select * from article where id = :id");
-$stmt->execute([":id" => $_GET["id"]]);
-$article = $stmt->fetch();
+$article = $ar->getArticle($_GET["id"]);
 
 if ($article === false) {
   header("Location: index.php");
@@ -23,11 +25,11 @@ if ($article === false) {
 
 <head>
   <title>Clean Blog - Start Bootstrap Theme</title>
-  <?php require "./php/head.php"; ?>
+  <?php include "./php/partials/head.php"; ?>
 </head>
 
 <body>
-  <?php require "./php/navigation.php"; ?>
+  <?php include "./php/partials/navigation.php"; ?>
 
   <!-- Page Header -->
   <header class="masthead">
@@ -59,9 +61,9 @@ if ($article === false) {
 
   <hr>
 
-  <?php require "./php/footer.php"; ?>
+  <?php include "./php/partials/footer.php"; ?>
 
-  <?php require "./php/scripts.php"; ?>
+  <?php include "./php/partials/scripts.php"; ?>
 </body>
 
 </html>
