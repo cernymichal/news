@@ -4,9 +4,9 @@ require_once "./php/Application.php";
 Application::init();
 
 $db = new Database();
-$cr = new CategoryRepository($db);
+$cr = new UserRepository($db);
 
-$categories = $cr->getCategories();
+$users = $cr->getUsers();
 
 ?>
 
@@ -14,7 +14,7 @@ $categories = $cr->getCategories();
 <html lang="cs">
 
 <head>
-  <title>Články - Kategorie</title>
+  <title>Články - Autoři</title>
   <?php include "./php/partials/head.php"; ?>
 </head>
 
@@ -28,7 +28,7 @@ $categories = $cr->getCategories();
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>Kategorie</h1>
+            <h1>Autoři</h1>
             <span class="subheading">Články</span>
           </div>
         </div>
@@ -40,11 +40,11 @@ $categories = $cr->getCategories();
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <?php foreach ($categories as $category) : ?>
+        <?php foreach ($users as $user) : ?>
           <div class="post-preview text-center">
-            <a href="<?= "search.php?category=" . $category["id"] ?>">
+            <a href="<?= "search.php?user=" . $user["id"] ?>">
               <h2 class="post-title">
-                <?= $category["name"] ?>
+                <?= $user["name"] ?>
               </h2>
             </a>
           </div>

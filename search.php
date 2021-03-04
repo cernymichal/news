@@ -4,9 +4,9 @@ require_once "./php/Application.php";
 Application::init();
 
 $db = new Database();
-$cr = new CategoryRepository($db);
+$ar = new ArticleRepository($db);
 
-$categories = $cr->getCategories();
+$articles = $ar->getArticles();
 
 ?>
 
@@ -14,7 +14,7 @@ $categories = $cr->getCategories();
 <html lang="cs">
 
 <head>
-  <title>Články - Kategorie</title>
+  <title>Články - Vyhledávání</title>
   <?php include "./php/partials/head.php"; ?>
 </head>
 
@@ -28,8 +28,8 @@ $categories = $cr->getCategories();
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>Kategorie</h1>
-            <span class="subheading">Články</span>
+            <h1>Vyhledávání</h1>
+            <span class="subheading">Nejnovější zprávy z IT</span>
           </div>
         </div>
       </div>
@@ -40,14 +40,22 @@ $categories = $cr->getCategories();
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <?php foreach ($categories as $category) : ?>
-          <div class="post-preview text-center">
-            <a href="<?= "search.php?category=" . $category["id"] ?>">
+        <?php foreach ($articles as $article) : ?>
+          <div class="post-preview">
+            <a href="<?= "article.php?id=" . $article["id"] ?>">
               <h2 class="post-title">
-                <?= $category["name"] ?>
+                <?= $article["title"] ?>
               </h2>
+              <p class="post-subtitle">
+                <?= $article["perex"] ?>
+              </p>
             </a>
+            <p class="post-meta">Zveřejnil
+              <a href="#">Start Bootstrap</a>
+              dne <?= date_format(date_create($article["created_at"]), "j.n.Y G:i") ?>
+            </p>
           </div>
+          <hr>
         <?php endforeach; ?>
       </div>
     </div>

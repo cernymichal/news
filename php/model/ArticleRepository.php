@@ -37,17 +37,18 @@ class ArticleRepository extends BaseRepository
         return $this->db->selectSingle($sql, $params);
     }
 
-    public function addArticle($title, $perex, $text)
+    public function addArticle($user_id, $title, $perex, $text)
     {
         $sql = "
             insert into article
             set
+                user_id = :user_id,
                 title = :title,
                 perex = :perex,
-                text = :text,
-                created_at = now()
+                text = :text
         ";
         $params = [
+            ":user_id" => $user_id,
             ":title" => $title,
             ":perex" => $perex,
             ":text" => $text
@@ -56,11 +57,12 @@ class ArticleRepository extends BaseRepository
         return $this->db->insert($sql, $params);
     }
 
-    public function editArticle($id, $title, $perex, $text)
+    public function editArticle($id, $user_id, $title, $perex, $text)
     {
         $sql = "
             update article
             set
+                user_id = :user_id,
                 title = :title,
                 perex = :perex,
                 text = :text
@@ -68,6 +70,7 @@ class ArticleRepository extends BaseRepository
         ";
         $params = [
             ":id" => $id,
+            ":user_id" => $user_id,
             ":title" => $title,
             ":perex" => $perex,
             ":text" => $text

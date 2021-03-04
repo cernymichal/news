@@ -14,7 +14,7 @@ $articles = $ar->getArticles();
 <html lang="cs">
 
 <head>
-  <title>Clean Blog - Start Bootstrap Theme</title>
+  <title>Články</title>
   <?php include "./php/partials/head.php"; ?>
 </head>
 

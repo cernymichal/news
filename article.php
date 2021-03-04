@@ -24,7 +24,7 @@ if ($article === false) {
 <html lang="cs">
 
 <head>
-  <title>Clean Blog - Start Bootstrap Theme</title>
+  <title>Články - <?= $article["title"] ?></title>
   <?php include "./php/partials/head.php"; ?>
 </head>
 

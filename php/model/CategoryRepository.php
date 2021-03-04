@@ -1,19 +1,19 @@
 <?php
 
-class UserRepository extends BaseRepository
+class CategoryRepository extends BaseRepository
 {
-    public function getUsers()
+    public function getCategories()
     {
-        $sql = "select * from user";
+        $sql = "select * from category";
 
         return $this->db->select($sql);
     }
 
-    public function getUser($id)
+    public function getCategory($id)
     {
         $sql = "
             select *
-            from user
+            from category
             where id = :id
         ";
         $params = [
@@ -23,49 +23,41 @@ class UserRepository extends BaseRepository
         return $this->db->selectSingle($sql, $params);
     }
 
-    public function addUser($email, $password, $name)
+    public function addCategory($name)
     {
         $sql = "
-            insert into user
+            insert into category
             set
-                email = :email,
-                password = :password,
                 name = :name
         ";
         $params = [
-            ":email" => $email,
-            ":password" => $password,
             ":name" => $name
         ];
 
         return $this->db->insert($sql, $params);
     }
 
-    public function editUser($id, $email, $password, $name)
+    public function editCategory($id, $name)
     {
         $sql = "
-            update user
+            update category
             set
-                email = :email,
-                password = :password,
                 name = :name
             where id = :id
         ";
         $params = [
             ":id" => $id,
-            ":email" => $email,
-            ":password" => $password,
             ":name" => $name
         ];
 
         return $this->db->update($sql, $params);
     }
 
-    public function deleteUser($id)
+    public function deleteCategory($id)
     {
         $sql = "
             delete
-            from user
+            from category
             where id = :id
         ";
         $params = [
