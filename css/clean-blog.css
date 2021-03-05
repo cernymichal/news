@@ -360,3 +360,21 @@ footer .copyright {
   font-size: 16px;
   padding: 25px 35px;
 }
+
+.article-meta {
+  font-size: 18px;
+  font-style: italic;
+  margin-top: 0;
+  color: #868e96;
+}
+
+.article-meta > a {
+  text-decoration: none;
+  color: #212529;
+}
+
+.article-meta > a:focus,
+.article-meta > a:hover {
+  text-decoration: underline;
+  color: #0085a1;
+}

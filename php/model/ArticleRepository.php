@@ -4,37 +4,92 @@ class ArticleRepository extends BaseRepository
 {
     public function getArticles()
     {
-        $sql = "select * from article";
+        $sql = "
+            select
+                article.*,
+                user.name as user_name
+            from article
+                inner join user on article.user_id = user.id
+        ";
 
-        return $this->db->select($sql);
+        $articles = $this->db->select($sql);
+
+        return $this->addCategories($articles);
     }
 
-    public function getArticlesUser($id)
+    public function getArticlesLast5()
     {
-        $sql = "select * from article";
+        $sql = "
+            select
+                article.*,
+                user.name as user_name
+            from article
+                inner join user on article.user_id = user.id
+            order by created_at desc
+            limit 5
+        ";
 
-        return $this->db->select($sql);
+        $articles = $this->db->select($sql);
+
+        return $this->addCategories($articles);
     }
 
-    public function getArticlesCategory($id)
+    public function getArticlesUser($user_id)
     {
-        $sql = "select * from article";
+        $sql = "
+            select
+                article.*,
+                user.name as user_name
+            from article
+                inner join user on article.user_id = user.id
+            where article.user_id = :user_id
+        ";
+        $params = [
+            ":user_id" => $user_id
+        ];
 
-        return $this->db->select($sql);
+        $articles = $this->db->select($sql, $params);
+
+        return $this->addCategories($articles);
+    }
+
+    public function getArticlesCategory($category_id)
+    {
+        $sql = "
+            select 
+                article.*,
+                user.name as user_name
+            from article
+                inner join user on article.user_id = user.id
+                inner join article_category on article_category.article_id = article.id
+            where article_category.category_id = :category_id
+        ";
+        $params = [
+            ":category_id" => $category_id
+        ];
+
+        $articles = $this->db->select($sql, $params);
+
+        return $this->addCategories($articles);
     }
 
     public function getArticle($id)
     {
         $sql = "
-            select *
+            select
+                article.*,
+                user.name as user_name
             from article
-            where id = :id
+                inner join user on article.user_id = user.id
+            where article.id = :id
         ";
         $params = [
             ":id" => $id
         ];
 
-        return $this->db->selectSingle($sql, $params);
+        $article = $this->db->selectSingle($sql, $params);
+
+        return $this->addCategoriesSingle($article);
     }
 
     public function addArticle($user_id, $title, $perex, $text)
@@ -91,5 +146,25 @@ class ArticleRepository extends BaseRepository
         ];
 
         return $this->db->delete($sql, $params);
+    }
+
+    private function addCategories($articles)
+    {
+        $cr = new CategoryRepository($this->db);
+
+        foreach ($articles as $key => $article) {
+            $articles[$key]["categories"] = $cr->getCategoriesArticle($article["id"]);
+        }
+
+        return $articles;
+    }
+
+    private function addCategoriesSingle($article)
+    {
+        $cr = new CategoryRepository($this->db);
+
+        $article["categories"] = $cr->getCategoriesArticle($article["id"]);
+
+        return $article;
     }
 }

@@ -29,7 +29,7 @@ $users = $cr->getUsers();
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
             <h1>Autoři</h1>
-            <span class="subheading">Články</span>
+            <span class="subheading"></span>
           </div>
         </div>
       </div>

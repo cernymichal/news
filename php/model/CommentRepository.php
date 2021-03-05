@@ -2,25 +2,18 @@
 
 class CommentRepository extends BaseRepository
 {
-    public function getComments()
-    {
-        $sql = "select * from comment";
-
-        return $this->db->select($sql);
-    }
-
-    public function getComment($id)
+    public function getCommentsArticle($article_id)
     {
         $sql = "
             select *
             from comment
-            where id = :id
+            where article_id = :article_id
         ";
         $params = [
-            ":id" => $id
+            ":article_id" => $article_id
         ];
 
-        return $this->db->selectSingle($sql, $params);
+        return $this->db->select($sql, $params);
     }
 
     public function addComment($article_id, $name, $email, $text)
@@ -41,28 +34,6 @@ class CommentRepository extends BaseRepository
         ];
 
         return $this->db->insert($sql, $params);
-    }
-
-    public function editComment($id, $article_id, $name, $email, $text)
-    {
-        $sql = "
-            update comment
-            set
-                article_id = :article_id,
-                name = :name,
-                email = :email,
-                text = :text
-            where id = :id
-        ";
-        $params = [
-            ":id" => $id,
-            "article_id" => $article_id,
-            "name" => $name,
-            "email" => $email,
-            "text" => $text
-        ];
-
-        return $this->db->update($sql, $params);
     }
 
     public function deleteComment($id)

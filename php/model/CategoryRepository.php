@@ -9,18 +9,21 @@ class CategoryRepository extends BaseRepository
         return $this->db->select($sql);
     }
 
-    public function getCategory($id)
+    public function getCategoriesArticle($article_id)
     {
         $sql = "
-            select *
+            select
+                category.*
             from category
-            where id = :id
+                inner join article_category on article_category.category_id = category.id
+            where article_category.article_id = :article_id
         ";
         $params = [
-            ":id" => $id
+            ":article_id" => $article_id
         ];
+        $categories = $this->db->select($sql, $params);
 
-        return $this->db->selectSingle($sql, $params);
+        return $categories;
     }
 
     public function addCategory($name)

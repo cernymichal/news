@@ -6,7 +6,7 @@ Application::init();
 $db = new Database();
 $ar = new ArticleRepository($db);
 
-$articles = $ar->getArticles();
+$articles = $ar->getArticlesLast5();
 
 ?>
 
@@ -51,8 +51,19 @@ $articles = $ar->getArticles();
               </p>
             </a>
             <p class="post-meta">Zveřejnil
-              <a href="#">Start Bootstrap</a>
+              <a href="<?= "search.php?user=" . $article["user_id"] ?>"><?= $article["user_name"] ?></a>
               dne <?= date_format(date_create($article["created_at"]), "j.n.Y G:i") ?>
+              <br>
+              <?php
+
+              $category_anchors = $article["categories"];
+              array_walk($category_anchors, function (&$category) {
+                $category = "<a href=\"search.php?category=" . $category["id"] ."\">" . $category["name"] . "</a>";
+              });
+
+              echo "v " . join(", ", $category_anchors);
+
+              ?>
             </p>
           </div>
           <hr>

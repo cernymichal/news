@@ -51,7 +51,7 @@ $articles = $ar->getArticles();
               </p>
             </a>
             <p class="post-meta">Zveřejnil
-              <a href="#">Start Bootstrap</a>
+              <a href="<?= "search.php?user=" . $article["user_id"] ?>"><?= $article["user_name"] ?></a>
               dne <?= date_format(date_create($article["created_at"]), "j.n.Y G:i") ?>
             </p>
           </div>

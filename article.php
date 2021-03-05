@@ -40,8 +40,8 @@ if ($article === false) {
           <div class="post-heading">
             <h1><?= $article["title"] ?></h1>
             <span class="meta">Zveřejnil
-              <a href="#">Start Bootstrap</a>
-              <?= date_format(date_create($article["created_at"]), "j.n.Y G:i") ?></span>
+              <a href="<?= "search.php?user=" . $article["user_id"] ?>"><?= $article["user_name"] ?></a>
+              dne <?= date_format(date_create($article["created_at"]), "j.n.Y G:i") ?></span>
           </div>
         </div>
       </div>
@@ -54,6 +54,19 @@ if ($article === false) {
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <?= $article["text"] ?>
+          <hr>
+          <p class="article-meta">
+            <?php
+
+            $category_anchors = $article["categories"];
+            array_walk($category_anchors, function (&$category) {
+              $category = "<a href=\"search.php?category=" . $category["id"] ."\">" . $category["name"] . "</a>";
+            });
+
+            echo "v " . join(", ", $category_anchors);
+
+            ?>
+          </p>
         </div>
       </div>
     </div>
