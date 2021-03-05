@@ -194,7 +194,7 @@ header.masthead .overlay {
 }
 
 header.masthead .page-heading,
-header.masthead .post-heading,
+header.masthead .article-heading,
 header.masthead .site-heading {
   padding: 200px 0 150px;
   color: white;
@@ -202,7 +202,7 @@ header.masthead .site-heading {
 
 @media only screen and (min-width: 768px) {
   header.masthead .page-heading,
-  header.masthead .post-heading,
+  header.masthead .article-heading,
   header.masthead .site-heading {
     padding: 200px 0;
   }
@@ -236,84 +236,84 @@ header.masthead .site-heading .subheading {
   }
 }
 
-header.masthead .post-heading h1 {
+header.masthead .article-heading h1 {
   font-size: 35px;
 }
 
-header.masthead .post-heading .meta,
-header.masthead .post-heading .subheading {
+header.masthead .article-heading .meta,
+header.masthead .article-heading .subheading {
   line-height: 1.1;
   display: block;
 }
 
-header.masthead .post-heading .subheading {
+header.masthead .article-heading .subheading {
   font-size: 24px;
   font-weight: 600;
   margin: 10px 0 30px;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-header.masthead .post-heading .meta {
+header.masthead .article-heading .meta {
   font-size: 20px;
   font-weight: 300;
   font-style: italic;
   font-family: "Lora", "Times New Roman", serif;
 }
 
-header.masthead .post-heading .meta a {
+header.masthead .article-heading .meta a {
   color: #fff;
 }
 
 @media only screen and (min-width: 768px) {
-  header.masthead .post-heading h1 {
+  header.masthead .article-heading h1 {
     font-size: 55px;
   }
-  header.masthead .post-heading .subheading {
+  header.masthead .article-heading .subheading {
     font-size: 30px;
   }
 }
 
-.post-preview > a {
+.article-preview > a {
   color: #212529;
 }
 
-.post-preview > a:focus,
-.post-preview > a:hover {
+.article-preview > a:focus,
+.article-preview > a:hover {
   text-decoration: none;
   color: #0085a1;
 }
 
-.post-preview > a > .post-title {
+.article-preview > a > .article-title {
   font-size: 30px;
   margin-top: 30px;
   margin-bottom: 10px;
 }
 
-.post-preview > a > .post-subtitle {
+.article-preview > a > .article-subtitle {
   font-weight: 300;
   margin: 0 0 10px;
 }
 
-.post-preview > .post-meta {
+.article-meta {
   font-size: 18px;
   font-style: italic;
   margin-top: 0;
   color: #868e96;
 }
 
-.post-preview > .post-meta > a {
+.article-meta > a {
   text-decoration: none;
   color: #212529;
 }
 
-.post-preview > .post-meta > a:focus,
-.post-preview > .post-meta > a:hover {
+.article-meta > a:focus,
+.article-meta > a:hover {
   text-decoration: underline;
   color: #0085a1;
 }
 
 @media only screen and (min-width: 768px) {
-  .post-preview > a > .post-title {
+  .article-preview > a > .article-title {
     font-size: 36px;
   }
 }
@@ -359,22 +359,4 @@ footer .copyright {
 .btn-lg {
   font-size: 16px;
   padding: 25px 35px;
-}
-
-.article-meta {
-  font-size: 18px;
-  font-style: italic;
-  margin-top: 0;
-  color: #868e96;
-}
-
-.article-meta > a {
-  text-decoration: none;
-  color: #212529;
-}
-
-.article-meta > a:focus,
-.article-meta > a:hover {
-  text-decoration: underline;
-  color: #0085a1;
 }

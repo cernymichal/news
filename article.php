@@ -18,65 +18,23 @@ if ($article === false) {
   die();
 }
 
+$title = "Články - " . $article["title"];
+$heading = $article["title"];
+$meta = "Zveřejnil <a href=\"user.php?id=" . $article["user_id"] . "\">" . $article["user_name"] . "</a>";
+$header_type = "article";
+
+include "./php/partials/document_start.php";
+
 ?>
 
-<!DOCTYPE html>
-<html lang="cs">
+<article>
+  <?= $article["text"] ?>
+</article>
 
-<head>
-  <title>Články - <?= $article["title"] ?></title>
-  <?php include "./php/partials/head.php"; ?>
-</head>
+<hr>
 
-<body>
-  <?php include "./php/partials/navigation.php"; ?>
+<?php
 
-  <!-- Page Header -->
-  <header class="masthead">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="post-heading">
-            <h1><?= $article["title"] ?></h1>
-            <span class="meta">Zveřejnil
-              <a href="<?= "user.php?id=" . $article["user_id"] ?>"><?= $article["user_name"] ?></a>
-              dne <?= date_format(date_create($article["created_at"]), "j.n.Y G:i") ?></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
+include "./php/partials/article_meta.php";
 
-  <!-- Post Content -->
-  <article>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <?= $article["text"] ?>
-          <hr>
-          <p class="article-meta">
-            <?php
-
-            $category_anchors = $article["categories"];
-            array_walk($category_anchors, function (&$category) {
-              $category = "<a href=\"category.php?id=" . $category["id"] ."\">" . $category["name"] . "</a>";
-            });
-
-            echo "v " . join(", ", $category_anchors);
-
-            ?>
-          </p>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <hr>
-
-  <?php include "./php/partials/footer.php"; ?>
-
-  <?php include "./php/partials/scripts.php"; ?>
-</body>
-
-</html>
+include "./php/partials/document_end.php";
