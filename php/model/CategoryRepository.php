@@ -26,6 +26,20 @@ class CategoryRepository extends BaseRepository
         return $categories;
     }
 
+    public function getCategory($id)
+    {
+        $sql = "
+            select *
+            from category
+            where id = :id
+        ";
+        $params = [
+            ":id" => $id
+        ];
+
+        return $this->db->selectSingle($sql, $params);
+    }
+
     public function addCategory($name)
     {
         $sql = "

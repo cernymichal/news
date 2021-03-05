@@ -42,7 +42,7 @@ $categories = $cr->getCategories();
       <div class="col-lg-8 col-md-10 mx-auto">
         <?php foreach ($categories as $category) : ?>
           <div class="post-preview text-center">
-            <a href="<?= "search.php?category=" . $category["id"] ?>">
+            <a href="<?= "category.php?id=" . $category["id"] ?>">
               <h2 class="post-title">
                 <?= $category["name"] ?>
               </h2>

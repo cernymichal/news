@@ -1,12 +1,19 @@
 <?php
 
+if (empty($_GET["id"])) {
+  header("Location: index.php");
+  die();
+}
+
 require_once "./php/Application.php";
 Application::init();
 
 $db = new Database();
-$cr = new UserRepository($db);
+$ar = new ArticleRepository($db);
+$ur = new UserRepository($db);
 
-$users = $cr->getUsers();
+$user = $ur->getUser($_GET["id"]);
+$articles = $ar->getArticlesUser($_GET["id"]);
 
 ?>
 
@@ -14,7 +21,7 @@ $users = $cr->getUsers();
 <html lang="cs">
 
 <head>
-  <title>Články - Autoři</title>
+  <title>Články - <?= $user["name"] ?></title>
   <?php include "./php/partials/head.php"; ?>
 </head>
 
@@ -28,7 +35,7 @@ $users = $cr->getUsers();
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>Autoři</h1>
+            <h1><?= $user["name"] ?></h1>
             <span class="subheading"></span>
           </div>
         </div>
@@ -40,14 +47,22 @@ $users = $cr->getUsers();
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <?php foreach ($users as $user) : ?>
-          <div class="post-preview text-center">
-            <a href="<?= "user.php?id=" . $user["id"] ?>">
+        <?php foreach ($articles as $article) : ?>
+          <div class="post-preview">
+            <a href="<?= "article.php?id=" . $article["id"] ?>">
               <h2 class="post-title">
-                <?= $user["name"] ?>
+                <?= $article["title"] ?>
               </h2>
+              <p class="post-subtitle">
+                <?= $article["perex"] ?>
+              </p>
             </a>
+            <p class="post-meta">Zveřejnil
+              <a href="<?= "user.php?id=" . $article["user_id"] ?>"><?= $article["user_name"] ?></a>
+              dne <?= date_format(date_create($article["created_at"]), "j.n.Y G:i") ?>
+            </p>
           </div>
+          <hr>
         <?php endforeach; ?>
       </div>
     </div>
