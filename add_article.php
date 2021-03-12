@@ -3,9 +3,14 @@
 require_once "./php/Application.php";
 Application::init();
 
-$title = "Články - Přidat článek";
 $heading = "Přidat článek";
+$title = "Články - $heading";
+$header_type = "article";
 
 include "./php/partials/document_start.php";
+
+?>
+
+<?php
 
 include "./php/partials/document_end.php";

@@ -39,9 +39,6 @@
           <li class="nav-item">
             <a class="nav-link" href="administration.php">Administrace článků</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="add_article.php">Přidat článek</a>
-          </li>
         </ul>
       </div>
     </div>
