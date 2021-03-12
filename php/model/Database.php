@@ -18,6 +18,11 @@ class Database
         $this->conn->query("set names utf8");
     }
 
+    public function lastInsertId()
+    {
+        return $this->conn->lastInsertId();
+    }
+
     public function select($sql, $params = [])
     {
         $stmt = $this->execute($sql, $params);

@@ -29,7 +29,7 @@ include "./php/partials/document_start.php";
     <tbody>
         <?php foreach($articles as $article): ?>
             <tr <?= $article["published"] == 1 ? "" : "class=\"table-warning\"" ?>>
-                <td><?= $article["title"] ?></td>
+                <td><?= empty($article["title"]) ? "Bez nadpisu" : $article["title"] ?></td>
                 <td>
                     <a class="btn btn-primary w-100" href="<?= "edit_article.php?id=" . $article["id"] ?>">Upravit</a>
                     <a class="btn btn-danger w-100" href="<?= "delete_article.php?id=" . $article["id"] ?>">Odstranit</a>

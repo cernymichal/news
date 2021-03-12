@@ -25,6 +25,7 @@ class ArticleRepository extends BaseRepository
                 user.name as user_name
             from article
                 left join user on article.user_id = user.id
+            where published = 1
             order by created_at desc
             limit 5
         ";
@@ -108,7 +109,7 @@ class ArticleRepository extends BaseRepository
         return $this->addCategoriesSingle($article);
     }
 
-    public function addArticle($user_id, $title, $perex, $text)
+    public function addArticle($user_id, $title, $perex, $text, $published)
     {
         $sql = "
             insert into article
@@ -116,19 +117,21 @@ class ArticleRepository extends BaseRepository
                 user_id = :user_id,
                 title = :title,
                 perex = :perex,
-                text = :text
+                text = :text,
+                published = :published
         ";
         $params = [
             ":user_id" => $user_id,
             ":title" => $title,
             ":perex" => $perex,
-            ":text" => $text
+            ":text" => $text,
+            ":published" => $published
         ];
 
         return $this->db->insert($sql, $params);
     }
 
-    public function editArticle($id, $user_id, $title, $perex, $text)
+    public function editArticle($id, $user_id, $title, $perex, $text, $published)
     {
         $sql = "
             update article
@@ -136,7 +139,8 @@ class ArticleRepository extends BaseRepository
                 user_id = :user_id,
                 title = :title,
                 perex = :perex,
-                text = :text
+                text = :text,
+                published = :published
             where id = :id
         ";
         $params = [
@@ -144,7 +148,8 @@ class ArticleRepository extends BaseRepository
             ":user_id" => $user_id,
             ":title" => $title,
             ":perex" => $perex,
-            ":text" => $text
+            ":text" => $text,
+            ":published" => $published
         ];
 
         return $this->db->update($sql, $params);
