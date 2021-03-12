@@ -9,7 +9,7 @@ class ArticleRepository extends BaseRepository
                 article.*,
                 user.name as user_name
             from article
-                inner join user on article.user_id = user.id
+                left join user on article.user_id = user.id
         ";
 
         $articles = $this->db->select($sql);
@@ -24,9 +24,25 @@ class ArticleRepository extends BaseRepository
                 article.*,
                 user.name as user_name
             from article
-                inner join user on article.user_id = user.id
+                left join user on article.user_id = user.id
             order by created_at desc
             limit 5
+        ";
+
+        $articles = $this->db->select($sql);
+
+        return $this->addCategories($articles);
+    }
+
+    public function getArticlesAlphabetically()
+    {
+        $sql = "
+            select
+                article.*,
+                user.name as user_name
+            from article
+                left join user on article.user_id = user.id
+            order by title
         ";
 
         $articles = $this->db->select($sql);
@@ -41,7 +57,7 @@ class ArticleRepository extends BaseRepository
                 article.*,
                 user.name as user_name
             from article
-                inner join user on article.user_id = user.id
+                left join user on article.user_id = user.id
             where article.user_id = :user_id
         ";
         $params = [
@@ -60,7 +76,7 @@ class ArticleRepository extends BaseRepository
                 article.*,
                 user.name as user_name
             from article
-                inner join user on article.user_id = user.id
+                left join user on article.user_id = user.id
                 inner join article_category on article_category.article_id = article.id
             where article_category.category_id = :category_id
         ";
@@ -80,7 +96,7 @@ class ArticleRepository extends BaseRepository
                 article.*,
                 user.name as user_name
             from article
-                inner join user on article.user_id = user.id
+                left join user on article.user_id = user.id
             where article.id = :id
         ";
         $params = [

@@ -17,7 +17,8 @@ CREATE TABLE `article` (
   `title` varchar(150) COLLATE utf8mb4_czech_ci NOT NULL,
   `perex` text COLLATE utf8mb4_czech_ci NOT NULL,
   `text` text COLLATE utf8mb4_czech_ci NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `published` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
 DROP TABLE IF EXISTS `article_category`;
