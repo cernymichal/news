@@ -13,7 +13,8 @@ $ar = new ArticleRepository($db);
 
 if (isset($_POST["user_id"], $_POST["title"], $_POST["perex"], $_POST["text"])) {
   $_POST["published"] = isset($_POST["published"]) ? 1 : 0;
-  $ar->editArticle($_GET["id"], $_POST["user_id"], $_POST["title"], $_POST["perex"], $_POST["text"], $_POST["published"]);
+  $_POST["categories"] = empty($_POST["categories"]) ? [] : $_POST["categories"];
+  $ar->editArticle($_GET["id"], $_POST["user_id"], $_POST["title"], $_POST["perex"], $_POST["text"], $_POST["published"], $_POST["categories"]);
 }
 
 $article = $ar->getArticle($_GET["id"]);
@@ -24,8 +25,10 @@ if ($article === false) {
 }
 
 $ur = new UserRepository($db);
-
 $users = $ur->getUsers();
+
+$cr = new CategoryRepository($db);
+$categories = $cr->getCategories();
 
 $title = "Články - " . $article["title"];
 $heading = $article["title"];
@@ -38,6 +41,10 @@ include "./php/partials/document_start.php";
 
 <form action="" method="post">
   <div class="form-group">
+    <div class="form-group">
+      <label for="inputTitle">Nadpis</label>
+      <input type="text" class="form-control" id="inputTitle" name="title" value="<?= $article["title"] ?>">
+    </div>
     <label for="inputUser">Autor</label>
     <select id="inputUser" class="form-control" name="user_id">
       <?php foreach ($users as $user) : ?>
@@ -46,12 +53,22 @@ include "./php/partials/document_start.php";
     </select>
   </div>
   <div class="form-group">
-    <label for="inputPublished">Veřejné</label>
-    <input class="form-control" type="checkbox" id="inputPublished" name="published" <?= $article["published"] == 1 ? "checked" : "" ?>>
+    <label for="inputPublished">Zveřejněno</label>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="inputPublished" name="published" <?= $article["published"] == 1 ? "checked" : "" ?>>
+      <label class="form-check-label" for="inputPublished">&nbsp;</label>
+    </div>
   </div>
   <div class="form-group">
-    <label for="inputTitle">Nadpis</label>
-    <input type="text" class="form-control" id="inputTitle" name="title" value="<?= $article["title"] ?>">
+    <label>Kategorie</label>
+    <?php foreach ($categories as $category) : ?>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="categories[]" value="<?= $category["id"] ?>" id="inputCategory<?= $category["id"] ?>" <?= in_array($category["id"], array_column($article["categories"], "id")) ? "checked" : "" ?>>
+        <label class="form-check-label" for="inputCategory<?= $category["id"] ?>">
+          <?= $category["name"] ?>
+        </label>
+      </div>
+    <?php endforeach; ?>
   </div>
   <div class="form-group">
     <label for="inputPerex">Perex</label>
