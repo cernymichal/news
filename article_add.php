@@ -12,7 +12,7 @@ if (isset($_POST["user_id"], $_POST["title"], $_POST["perex"], $_POST["text"])) 
   $_POST["categories"] = empty($_POST["categories"]) ? [] : $_POST["categories"];
   $ar->addArticle($_POST["user_id"], $_POST["title"], $_POST["perex"], $_POST["text"], $_POST["published"], $_POST["categories"]);
 
-  header("Location: edit_article.php?id=" . $db->lastInsertId());
+  header("Location: article_administration.php");
   die();
 }
 

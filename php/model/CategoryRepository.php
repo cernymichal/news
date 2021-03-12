@@ -9,6 +9,13 @@ class CategoryRepository extends BaseRepository
         return $this->db->select($sql);
     }
 
+    public function getCategoriesAlphabetically()
+    {
+        $sql = "select * from category order by name";
+
+        return $this->db->select($sql);
+    }
+
     public function getCategoriesArticle($article_id)
     {
         $sql = "

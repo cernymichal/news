@@ -9,6 +9,13 @@ class UserRepository extends BaseRepository
         return $this->db->select($sql);
     }
 
+    public function getUsersAlphabetically()
+    {
+        $sql = "select * from user order by name";
+
+        return $this->db->select($sql);
+    }
+
     public function getUser($id)
     {
         $sql = "

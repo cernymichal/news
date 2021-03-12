@@ -4,14 +4,14 @@ require_once "./php/Application.php";
 Application::init();
 
 if (empty($_GET["id"])) {
-  header("Location: administration.php");
+  header("Location: article_administration.php");
   die();
 }
 
 $db = new Database();
 $ar = new ArticleRepository($db);
 
-$article = $ar->deleteArticle($_GET["id"]);
+$ar->deleteArticle($_GET["id"]);
 
-header("Location: administration.php");
+header("Location: article_administration.php");
 die();

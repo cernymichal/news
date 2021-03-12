@@ -1,14 +1,14 @@
 <?php
 
 if (empty($article)) {
-    $article = [
-        "title" => "",
-        "user_id" => "",
-        "published" => 0,
-        "categories" => [],
-        "perex" => "",
-        "text" => ""
-    ];
+  $article = [
+    "title" => "",
+    "user_id" => "",
+    "published" => 0,
+    "categories" => [],
+    "perex" => "",
+    "text" => ""
+  ];
 }
 
 $ur = new UserRepository($db);
@@ -62,10 +62,10 @@ $categories = $cr->getCategories();
       <?= str_replace('&', '&amp;', $article["text"]) ?>
     </textarea>
   </div>
-  <?php if (!empty($article["id"])): ?>
+  <?php if (!empty($article["id"])) : ?>
     <div class="form-group">
-        <label for="inputCreatedAt">Vytvořeno</label>
-        <input type="text" class="form-control" id="inputCreatedAt" value="<?= date_format(date_create($article["created_at"]), "j.n.Y G:i") ?>" disabled>
+      <label for="inputCreatedAt">Vytvořeno</label>
+      <input type="text" class="form-control" id="inputCreatedAt" value="<?= date_format(date_create($article["created_at"]), "j.n.Y G:i") ?>" disabled>
     </div>
   <?php endif; ?>
   <button type="submit" class="btn btn-primary"><?= empty($article["id"]) ? "Vytvořit" : "Uložit" ?></button>

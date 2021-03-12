@@ -39,7 +39,7 @@
             <a class="nav-link" href="users.php">Autoři</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="administration.php">Administrace článků</a>
+            <a class="nav-link" href="administration.php">Administrace</a>
           </li>
         </ul>
       </div>
