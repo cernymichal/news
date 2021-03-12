@@ -10,6 +10,7 @@ $articles = $ar->getArticlesAlphabetically();
 
 $title = "Články - Administrace";
 $heading = "Administrace článků";
+$header_type = "article";
 
 include "./php/partials/document_start.php";
 
