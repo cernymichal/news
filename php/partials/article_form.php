@@ -22,11 +22,11 @@ $categories = $cr->getCategories();
 <form action="" method="post">
   <div class="form-group">
     <div class="form-group">
-      <label for="inputTitle">Nadpis</label>
-      <input type="text" class="form-control" id="inputTitle" name="title" value="<?= $article["title"] ?>">
+      <label for="inputTitle">Nadpis *</label>
+      <input type="text" class="form-control" id="inputTitle" name="title" value="<?= $article["title"] ?>" required>
     </div>
-    <label for="inputUser">Autor</label>
-    <select id="inputUser" class="form-control" name="user_id">
+    <label for="inputUser">Autor *</label>
+    <select id="inputUser" class="form-control" name="user_id" required>
       <?php foreach ($users as $user) : ?>
         <option value="<?= $user["id"] ?>" <?= $article["user_id"] == $user["id"] ? "selected" : "" ?>><?= $user["name"] ?></option>
       <?php endforeach; ?>

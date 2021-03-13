@@ -28,7 +28,7 @@ include "./php/partials/document_start.php";
         </tr>
     </thead>
     <tbody>
-        <?php foreach($categories as $category): ?>
+        <?php foreach ($categories as $category) : ?>
             <tr>
                 <td><?= $category["name"] ?></td>
                 <td>

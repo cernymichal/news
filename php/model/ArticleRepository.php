@@ -204,7 +204,7 @@ class ArticleRepository extends BaseRepository
         $current_categories = array_column($cr->getCategoriesArticle($article_id), "id");
 
         foreach ($categories as $category_id) {
-            if(!in_array($category_id, $current_categories)) {
+            if (!in_array($category_id, $current_categories)) {
                 $sql = "
                     insert into article_category
                     set
@@ -221,7 +221,7 @@ class ArticleRepository extends BaseRepository
         }
 
         foreach ($current_categories as $category_id) {
-            if(!in_array($category_id, $categories)) {
+            if (!in_array($category_id, $categories)) {
                 $sql = "
                     delete from article_category
                     where article_id = :article_id and category_id = :category_id

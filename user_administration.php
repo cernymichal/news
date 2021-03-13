@@ -28,7 +28,7 @@ include "./php/partials/document_start.php";
         </tr>
     </thead>
     <tbody>
-        <?php foreach($users as $user): ?>
+        <?php foreach ($users as $user) : ?>
             <tr>
                 <td><?= $user["name"] ?></td>
                 <td>

@@ -41,7 +41,7 @@ class UserRepository extends BaseRepository
         ";
         $params = [
             ":email" => $email,
-            ":password" => $password,
+            ":password" => hash("sha256", $password),
             ":name" => $name
         ];
 
@@ -54,16 +54,19 @@ class UserRepository extends BaseRepository
             update user
             set
                 email = :email,
-                password = :password,
+                " . (empty($password) ? "" : "password = :password,") . "
                 name = :name
             where id = :id
         ";
         $params = [
             ":id" => $id,
             ":email" => $email,
-            ":password" => $password,
             ":name" => $name
         ];
+
+        if (!empty($password)) {
+            $params["password"] = hash("sha256", $password);
+        }
 
         return $this->db->update($sql, $params);
     }
