@@ -29,7 +29,7 @@ if ($article === false) {
 
 $title = "Články - " . $article["title"];
 $heading = $article["title"];
-$meta = "Zveřejnil <a href=\"user.php?id=" . $article["user_id"] . "\">" . $article["user_name"] . "</a>";
+$meta = 'Zveřejnil <a href="user.php?id=' . $article["user_id"] . '">' . $article["user_name"] . "</a>";
 $header_type = "article";
 
 include "./php/partials/document_start.php";
