@@ -21,10 +21,10 @@ $categories = $cr->getCategories();
 
 <form action="" method="post">
   <div class="form-group">
-    <div class="form-group">
-      <label for="inputTitle">Nadpis *</label>
-      <input type="text" class="form-control" id="inputTitle" name="title" value="<?= $article["title"] ?>" required>
-    </div>
+    <label for="inputTitle">Nadpis *</label>
+    <input type="text" class="form-control" id="inputTitle" name="title" value="<?= $article["title"] ?>" required>
+  </div>
+  <div class="form-group">
     <label for="inputUser">Autor *</label>
     <select id="inputUser" class="form-control" name="user_id" required>
       <?php foreach ($users as $user) : ?>

@@ -10,6 +10,7 @@ if (empty($_GET["id"])) {
 
 $db = new Database();
 $ar = new ArticleRepository($db);
+$cr = new CommentRepository($db);
 
 $article = $ar->getArticle($_GET["id"]);
 
@@ -17,6 +18,15 @@ if ($article === false) {
   header("Location: index.php");
   die();
 }
+
+if (isset($_POST["name"], $_POST["email"], $_POST["text"])) {
+  $cr->addComment($_GET["id"], $_POST["name"], $_POST["email"], $_POST["text"]);
+
+  header("Location: " . $_SERVER["REQUEST_URI"]);
+  die();
+}
+
+$comments = $cr->getCommentsArticle($_GET["id"]);
 
 $title = "Články - " . $article["title"];
 $heading = $article["title"];
@@ -33,8 +43,16 @@ include "./php/partials/document_start.php";
 
 <hr>
 
-<?php
+<?php include "./php/partials/article_meta.php"; ?>
 
-include "./php/partials/article_meta.php";
+<h3 class="font-weight-normal mb-3">Napsat komentář</h3>
+
+<?php include "./php/partials/comment_form.php"; ?>
+
+<div class="mt-5">
+  <?php include "./php/partials/comment_list.php"; ?>
+</div>
+
+<?php
 
 include "./php/partials/document_end.php";

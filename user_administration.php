@@ -32,8 +32,8 @@ include "./php/partials/document_start.php";
       <tr>
         <td><?= $user["name"] ?></td>
         <td>
-          <a class="btn btn-primary w-100" href="<?= "user_edit.php?id=" . $user["id"] ?>">Upravit</a>
-          <a class="btn btn-danger w-100" href="<?= "user_delete.php?id=" . $user["id"] ?>">Odstranit</a>
+          <a class="btn btn-primary w-100 px-2" href="<?= "user_edit.php?id=" . $user["id"] ?>">Upravit</a>
+          <a class="btn btn-danger w-100 px-2" href="<?= "user_delete.php?id=" . $user["id"] ?>">Odstranit</a>
         </td>
       </tr>
     <?php endforeach; ?>

@@ -32,8 +32,8 @@ include "./php/partials/document_start.php";
       <tr>
         <td><?= $category["name"] ?></td>
         <td>
-          <a class="btn btn-primary w-100" href="<?= "category_edit.php?id=" . $category["id"] ?>">Upravit</a>
-          <a class="btn btn-danger w-100" href="<?= "category_delete.php?id=" . $category["id"] ?>">Odstranit</a>
+          <a class="btn btn-primary w-100 px-0" href="<?= "category_edit.php?id=" . $category["id"] ?>">Upravit</a>
+          <a class="btn btn-danger w-100 px-0" href="<?= "category_delete.php?id=" . $category["id"] ?>">Odstranit</a>
         </td>
       </tr>
     <?php endforeach; ?>

@@ -2,6 +2,20 @@
 
 class CommentRepository extends BaseRepository
 {
+    public function getComment($id)
+    {
+        $sql = "
+            select *
+            from comment
+            where id = :id
+        ";
+        $params = [
+            ":id" => $id
+        ];
+
+        return $this->db->selectSingle($sql, $params);
+    }
+
     public function getCommentsArticle($article_id)
     {
         $sql = "

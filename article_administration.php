@@ -32,8 +32,9 @@ include "./php/partials/document_start.php";
       <tr <?= $article["published"] == 1 ? "" : 'class="table-warning"' ?>>
         <td><?= $article["title"] ?></td>
         <td>
-          <a class="btn btn-primary w-100" href="<?= "article_edit.php?id=" . $article["id"] ?>">Upravit</a>
-          <a class="btn btn-danger w-100" href="<?= "article_delete.php?id=" . $article["id"] ?>">Odstranit</a>
+          <a class="btn btn-primary w-100 px-0" href="<?= "article_edit.php?id=" . $article["id"] ?>">Upravit</a>
+          <a class="btn btn-secondary w-100 px-0" href="<?= "article_comments.php?id=" . $article["id"] ?>">Komentáře</a>
+          <a class="btn btn-danger w-100 px-0" href="<?= "article_delete.php?id=" . $article["id"] ?>">Odstranit</a>
         </td>
       </tr>
     <?php endforeach; ?>
