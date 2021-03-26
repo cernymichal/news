@@ -108,11 +108,30 @@ img::-moz-selection {
   color: #343a40;
 }
 
-#mainNav .navbar-nav > li.nav-item > a {
+#mainNav .navbar-nav > li.nav-item > a,
+#mainNav .navbar-nav > li.nav-item > p {
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 1px;
   text-transform: uppercase;
+}
+
+#mainNav .navbar-nav > li.nav-item > p {
+  font-weight: 600;
+  margin: 0;
+  padding: 8px 0;
+  color: rgba(0,0,0,.5);
+}
+
+#mainNav .navbar-nav > li.nav-item.separator {
+  height: 1em;
+  width: 0;
+  border-right-width: 2px;
+  border-right-style: solid;
+}
+
+#mainNav .navbar-nav > li.nav-item.only-widescreen {
+  display: none;
 }
 
 @media only screen and (min-width: 992px) {
@@ -128,13 +147,22 @@ img::-moz-selection {
   #mainNav .navbar-brand:hover {
     color: rgba(255, 255, 255, 0.8);
   }
-  #mainNav .navbar-nav > li.nav-item > a {
+  #mainNav .navbar-nav > li.nav-item > a,
+  #mainNav .navbar-nav > li.nav-item > p {
     padding: 10px 20px;
     color: #fff;
   }
   #mainNav .navbar-nav > li.nav-item > a:focus,
   #mainNav .navbar-nav > li.nav-item > a:hover {
     color: rgba(255, 255, 255, 0.8);
+  }
+  #mainNav .navbar-nav > li.nav-item.separator {
+    margin: 10px 10px;
+    border-color: #fff;
+  }
+
+  #mainNav .navbar-nav > li.nav-item.only-widescreen {
+    display: initial;
   }
 }
 
@@ -161,12 +189,16 @@ img::-moz-selection {
   #mainNav.is-fixed .navbar-brand:hover {
     color: #0085a1;
   }
-  #mainNav.is-fixed .navbar-nav > li.nav-item > a {
+  #mainNav.is-fixed .navbar-nav > li.nav-item > a,
+  #mainNav.is-fixed .navbar-nav > li.nav-item > p {
     color: #212529;
   }
   #mainNav.is-fixed .navbar-nav > li.nav-item > a:focus,
   #mainNav.is-fixed .navbar-nav > li.nav-item > a:hover {
     color: #0085a1;
+  }
+  #mainNav.is-fixed .navbar-nav > li.nav-item.separator {
+    border-color: #0085a1;
   }
   #mainNav.is-visible {
     /* if the user changes the scrolling direction, we show the header */

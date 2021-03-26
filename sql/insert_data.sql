@@ -13,8 +13,8 @@ INSERT INTO `category` (`id`, `name`) VALUES
 (3, 'Z domova');
 
 INSERT INTO `user` (`id`, `email`, `password`, `name`) VALUES
-(1, 'j.nov@ak.cz', 'd74ff0ee8da3b9806b18c877dbf29bbde50b5bd8e4dad7a3a725000feb82e8f1', 'Jan Novák'),
-(2, 'p.voma@cka.cz', 'd74ff0ee8da3b9806b18c877dbf29bbde50b5bd8e4dad7a3a725000feb82e8f1', 'Josef Vomáčka');
+(1, 'j.nov@ak.cz', '$2y$10$HcY.aiG5ohuPJEJMlOnbh.HGOyc9bNHxjJfHNU5ldkVjDdHdazR5C' /* "password */, 'Jan Novák'),
+(2, 'p.voma@cka.cz', '$2y$10$HcY.aiG5ohuPJEJMlOnbh.HGOyc9bNHxjJfHNU5ldkVjDdHdazR5C' /* "password */, 'Josef Vomáčka');
 COMMIT;
 
 INSERT INTO `article` (`id`, `user_id`, `title`, `perex`, `text`, `created_at`, `published`) VALUES

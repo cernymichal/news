@@ -16,8 +16,8 @@ if (empty($user)) {
     <input type="text" class="form-control" id="inputName" name="name" value="<?= $user["name"] ?>" required>
   </div>
   <div class="form-group">
-    <label for="inputEmail">Email</label>
-    <input type="email" class="form-control" id="inputEmail" name="email" value="<?= $user["email"] ?>">
+    <label for="inputEmail">Email *</label>
+    <input type="email" class="form-control" id="inputEmail" name="email" value="<?= $user["email"] ?>" required>
   </div>
   <div class="form-group">
     <label for="inputPassword">Heslo <?= empty($user["id"]) ? "*" : "" ?></label>

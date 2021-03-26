@@ -2,6 +2,7 @@
 
 require_once "./php/Application.php";
 Application::init();
+Application::assert_logged_in();
 
 $db = new Database();
 

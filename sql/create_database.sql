@@ -48,7 +48,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(10) UNSIGNED NOT NULL,
   `email` varchar(50) COLLATE utf8mb4_czech_ci NOT NULL,
-  `password` varchar(64) COLLATE utf8mb4_czech_ci NOT NULL,
+  `password` varchar(256) COLLATE utf8mb4_czech_ci NOT NULL,
   `name` varchar(30) COLLATE utf8mb4_czech_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 

@@ -30,6 +30,20 @@ class UserRepository extends BaseRepository
         return $this->db->selectSingle($sql, $params);
     }
 
+    public function getUserEmail($email)
+    {
+        $sql = "
+            select *
+            from user
+            where email = :email
+        ";
+        $params = [
+            ":email" => $email
+        ];
+
+        return $this->db->selectSingle($sql, $params);
+    }
+
     public function addUser($email, $password, $name)
     {
         $sql = "
@@ -41,7 +55,7 @@ class UserRepository extends BaseRepository
         ";
         $params = [
             ":email" => $email,
-            ":password" => hash("sha256", $password),
+            ":password" => password_hash($password, PASSWORD_DEFAULT),
             ":name" => $name
         ];
 
@@ -65,7 +79,7 @@ class UserRepository extends BaseRepository
         ];
 
         if (!empty($password)) {
-            $params["password"] = hash("sha256", $password);
+            $params["password"] = password_hash($password, PASSWORD_DEFAULT);
         }
 
         return $this->db->update($sql, $params);
