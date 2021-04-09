@@ -34,7 +34,8 @@ class Application
     }
 
     public static function logged_in() {
-        return isset($_SESSION["user"]);
+        $ur = new UserRepository(new Database());
+        return isset($_SESSION["user"]) && !empty($ur->getUser($_SESSION["user"]["id"]));
     }
 
     public static function logged_user() {

@@ -1,33 +1,40 @@
+
 <?php
 
 require_once "./php/Application.php";
 Application::init();
-Application::assert_logged_in();
 
-$db = new Database();
+$error = false;
 
 if (isset($_POST["email"], $_POST["password"], $_POST["name"])) {
+  $db = new Database();
   $ur = new UserRepository($db);
 
   if (!empty($ur->getUserEmail($_POST["email"]))) {
-    $message = "Tento email už je zaregistrovaný!";
-    $url = "user_administration.php?error=" . rawurlencode($message);
-    header("Location: $url");
-    die();
+    $error = "Tento email už je zaregistrovaný!";
   } else {
     $ur->addUser($_POST["email"], $_POST["password"], $_POST["name"]);
 
-    header("Location: user_administration.php");
+    $user = $ur->getUser($db->lastInsertId());
+
+    Application::login_session($user);
+    header("Location: index.php");
     die();
   }
 }
 
-$heading = "Přidat autora";
+$heading = "Registrace";
 $title = "Články - $heading";
 $header_type = "article";
 
 include "./php/partials/document_start.php";
 
 include "./php/partials/user_form.php";
+
+if (!empty($error)) {
+  $error_message = $error;
+  $modals = ["./php/partials/modals/error_message.php"];
+  $scripts = '<script>MicroModal.show("modal-error-message");</script>';
+}
 
 include "./php/partials/document_end.php";

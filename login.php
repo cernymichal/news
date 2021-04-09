@@ -10,12 +10,12 @@ if (isset($_POST["email"], $_POST["password"])) {
   $ur = new UserRepository($db);
   $user = $ur->getUserEmail($_POST["email"]);
 
-  if (isset($user) && password_verify($_POST["password"], $user["password"])) {
+  if (!empty($user) && password_verify($_POST["password"], $user["password"])) {
     Application::login_session($user);
     header("Location: index.php");
     die();
   } else {
-    $error = true;
+    $error = "Chybně zadané přihlašovací údaje";
   }
 }
 
@@ -37,13 +37,22 @@ include "./php/partials/document_start.php";
     <label for="inputPassword">Heslo</label>
     <input type="password" class="form-control" id="inputPassword" name="password">
   </div>
-  <button type="submit" class="btn btn-primary">Přihlásit se</button>
+  <div class="row">
+    <div class="col-6">
+      <button type="submit" class="btn btn-primary">Přihlásit se</button>
+    </div>
+    <div class="col-6 text-right">
+      <a class="btn btn-success" href="register.php">Registrovat se</a>
+    </div>
+  </div>
 </form>
 
-<?php if ($error) : ?>
-  <p>
-    <strong>Chybně zadané přihlašovací údaje</strong>
-  </p>
-<?php endif; ?>
+<?php
 
-<?php include "./php/partials/document_end.php"; ?>
+if (!empty($error)) {
+  $error_message = $error;
+  $modals = ["./php/partials/modals/error_message.php"];
+  $scripts = '<script>MicroModal.show("modal-error-message");</script>';
+}
+
+include "./php/partials/document_end.php";
