@@ -7,8 +7,7 @@ Application::init();
 $error = false;
 
 if (isset($_POST["email"], $_POST["password"], $_POST["name"])) {
-  $db = new Database();
-  $ur = new UserRepository($db);
+  $ur = Application::context()->user_repository;
 
   if (!empty($ur->getUserEmail($_POST["email"]))) {
     $error = "Tento email už je zaregistrovaný!";
@@ -17,7 +16,7 @@ if (isset($_POST["email"], $_POST["password"], $_POST["name"])) {
 
     $user = $ur->getUser($db->lastInsertId());
 
-    Application::login_session($user);
+    Application::login($user);
     header("Location: index.php");
     die();
   }

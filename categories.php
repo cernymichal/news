@@ -3,8 +3,7 @@
 require_once "./php/Application.php";
 Application::init();
 
-$db = new Database();
-$cr = new CategoryRepository($db);
+$cr = Application::context()->category_repository;
 
 $categories = $cr->getCategories();
 

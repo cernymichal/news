@@ -9,9 +9,8 @@ if (empty($_GET["id"])) {
   die();
 }
 
-$db = new Database();
-$ur = new UserRepository($db);
-$ar = new ArticleRepository($db);
+$ur = Application::context()->user_repository;
+$ar = Application::context()->article_repository;
 
 if (!empty($ar->getArticlesUser($_GET["id"]))) {
   $message = "Autor má stále články!";

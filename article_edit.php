@@ -9,8 +9,7 @@ if (empty($_GET["id"])) {
   die();
 }
 
-$db = new Database();
-$ar = new ArticleRepository($db);
+$ar = Application::context()->article_repository;
 
 if (isset($_POST["user_id"], $_POST["title"], $_POST["perex"], $_POST["text"])) {
   $_POST["published"] = isset($_POST["published"]) ? 1 : 0;

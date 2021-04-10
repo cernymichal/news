@@ -4,8 +4,7 @@ require_once "./php/Application.php";
 Application::init();
 Application::assert_logged_in();
 
-$db = new Database();
-$cr = new CategoryRepository($db);
+$cr = Application::context()->category_repository;
 
 $categories = $cr->getCategoriesAlphabetically();
 

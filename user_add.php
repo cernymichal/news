@@ -4,10 +4,8 @@ require_once "./php/Application.php";
 Application::init();
 Application::assert_logged_in();
 
-$db = new Database();
-
 if (isset($_POST["email"], $_POST["password"], $_POST["name"])) {
-  $ur = new UserRepository($db);
+  $ur = Application::context()->user_repository;
 
   if (!empty($ur->getUserEmail($_POST["email"]))) {
     $message = "Tento email už je zaregistrovaný!";

@@ -2,8 +2,6 @@
 
 include "./php/Application.php";
 Application::init();
-Application::assert_logged_in();
-
-session_destroy();
+Application::logout();
 
 header("Location: index.php");

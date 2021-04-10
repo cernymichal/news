@@ -8,9 +8,8 @@ if (empty($_GET["id"])) {
 require_once "./php/Application.php";
 Application::init();
 
-$db = new Database();
-$ar = new ArticleRepository($db);
-$cr = new CategoryRepository($db);
+$ar = Application::context()->article_repository;
+$cr = Application::context()->category_repository;
 
 $category = $cr->getCategory($_GET["id"]);
 $articles = $ar->getArticlesCategory($_GET["id"]);

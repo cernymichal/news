@@ -9,8 +9,7 @@ if (empty($_GET["id"])) {
   die();
 }
 
-$db = new Database();
-$ar = new ArticleRepository($db);
+$ar = Application::context()->article_repository;
 
 $ar->deleteArticle($_GET["id"]);
 

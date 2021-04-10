@@ -41,7 +41,7 @@
           <li class="nav-item separator only-widescreen"></li>
           <?php if (Application::logged_in()) : ?>
             <li class="nav-item">
-              <p><?= Application::logged_user()["name"] ?></p>
+              <p <?= Application::user()["admin"] ? 'class="bg-danger"' : "" ?>><?= Application::user()["name"] ?></p>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="administration.php">Administrace</a>

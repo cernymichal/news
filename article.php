@@ -8,9 +8,8 @@ if (empty($_GET["id"])) {
   die();
 }
 
-$db = new Database();
-$ar = new ArticleRepository($db);
-$cr = new CommentRepository($db);
+$ar = Application::context()->article_repository;
+$cr = Application::context()->comment_repository;
 
 $article = $ar->getArticle($_GET["id"]);
 

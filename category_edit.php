@@ -9,8 +9,7 @@ if (empty($_GET["id"])) {
   die();
 }
 
-$db = new Database();
-$cr = new CategoryRepository($db);
+$cr = Application::context()->category_repository;
 
 if (isset($_POST["name"])) {
   $cr->editCategory($_GET["id"], $_POST["name"]);

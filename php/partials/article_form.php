@@ -11,11 +11,8 @@ if (empty($article)) {
   ];
 }
 
-$ur = new UserRepository($db);
-$users = $ur->getUsers();
-
-$cr = new CategoryRepository($db);
-$categories = $cr->getCategories();
+$users = Application::context()->user_repository->getUsers();
+$categories = Application::context()->category_repository->getCategories();
 
 ?>
 

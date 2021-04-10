@@ -6,12 +6,11 @@ Application::init();
 $error = false;
 
 if (isset($_POST["email"], $_POST["password"])) {
-  $db = new Database();
-  $ur = new UserRepository($db);
+  $ur = Application::context()->user_repository;
   $user = $ur->getUserEmail($_POST["email"]);
 
   if (!empty($user) && password_verify($_POST["password"], $user["password"])) {
-    Application::login_session($user);
+    Application::login($user);
     header("Location: index.php");
     die();
   } else {

@@ -8,9 +8,8 @@ if (empty($_GET["id"])) {
 require_once "./php/Application.php";
 Application::init();
 
-$db = new Database();
-$ar = new ArticleRepository($db);
-$ur = new UserRepository($db);
+$ar = Application::context()->article_repository;
+$ur = Application::context()->user_repository;
 
 $user = $ur->getUser($_GET["id"]);
 $articles = $ar->getArticlesUser($_GET["id"]);

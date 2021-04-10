@@ -9,8 +9,7 @@ if (empty($_GET["id"])) {
   die();
 }
 
-$db = new Database();
-$cr = new CommentRepository($db);
+$cr = Application::context()->comment_repository;
 
 $comment = $cr->getComment($_GET["id"]);
 

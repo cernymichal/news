@@ -3,8 +3,7 @@
 require_once "./php/Application.php";
 Application::init();
 
-$db = new Database();
-$ur = new UserRepository($db);
+$ur = Application::context()->user_repository;
 
 $users = $ur->getUsers();
 

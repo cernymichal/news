@@ -4,10 +4,8 @@ require_once "./php/Application.php";
 Application::init();
 Application::assert_logged_in();
 
-$db = new Database();
-
 if (isset($_POST["name"])) {
-  $cr = new CategoryRepository($db);
+  $cr = Application::context()->category_repository;
   $cr->addCategory($_POST["name"]);
 
   header("Location: category_administration.php");

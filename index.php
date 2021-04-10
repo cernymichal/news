@@ -3,8 +3,7 @@
 require_once "./php/Application.php";
 Application::init();
 
-$db = new Database();
-$ar = new ArticleRepository($db);
+$ar = Application::context()->article_repository;
 
 $articles = $ar->getArticlesLast5();
 

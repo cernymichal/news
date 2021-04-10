@@ -49,7 +49,8 @@ CREATE TABLE `user` (
   `id` int(10) UNSIGNED NOT NULL,
   `email` varchar(50) COLLATE utf8mb4_czech_ci NOT NULL,
   `password` varchar(256) COLLATE utf8mb4_czech_ci NOT NULL,
-  `name` varchar(30) COLLATE utf8mb4_czech_ci NOT NULL
+  `name` varchar(30) COLLATE utf8mb4_czech_ci NOT NULL,
+  `admin` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
 

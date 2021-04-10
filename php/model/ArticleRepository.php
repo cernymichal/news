@@ -179,10 +179,8 @@ class ArticleRepository extends BaseRepository
 
     private function addCategories($articles)
     {
-        $cr = new CategoryRepository($this->db);
-
         foreach ($articles as $key => $article) {
-            $articles[$key]["categories"] = $cr->getCategoriesArticle($article["id"]);
+            $articles[$key]["categories"] = Application::context()->category_repository->getCategoriesArticle($article["id"]);
         }
 
         return $articles;
@@ -190,18 +188,14 @@ class ArticleRepository extends BaseRepository
 
     private function addCategoriesSingle($article)
     {
-        $cr = new CategoryRepository($this->db);
-
-        $article["categories"] = $cr->getCategoriesArticle($article["id"]);
+        $article["categories"] = Application::context()->category_repository->getCategoriesArticle($article["id"]);
 
         return $article;
     }
 
     private function updateCategories($article_id, $categories)
     {
-        $cr = new CategoryRepository($this->db);
-
-        $current_categories = array_column($cr->getCategoriesArticle($article_id), "id");
+        $current_categories = array_column(Application::context()->category_repository->getCategoriesArticle($article_id), "id");
 
         foreach ($categories as $category_id) {
             if (!in_array($category_id, $current_categories)) {

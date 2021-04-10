@@ -9,8 +9,7 @@ if (empty($_GET["id"])) {
   die();
 }
 
-$db = new Database();
-$ur = new UserRepository($db);
+$ur = Application::context()->user_repository;
 
 if (isset($_POST["email"], $_POST["password"], $_POST["name"])) {
   $ur->editUser($_GET["id"], $_POST["email"], $_POST["password"], $_POST["name"]);

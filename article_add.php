@@ -4,10 +4,8 @@ require_once "./php/Application.php";
 Application::init();
 Application::assert_logged_in();
 
-$db = new Database();
-
 if (isset($_POST["user_id"], $_POST["title"], $_POST["perex"], $_POST["text"])) {
-  $ar = new ArticleRepository($db);
+  $ar = Application::context()->article_repository;
 
   $_POST["published"] = isset($_POST["published"]) ? 1 : 0;
   $_POST["categories"] = empty($_POST["categories"]) ? [] : $_POST["categories"];

@@ -4,8 +4,7 @@ require_once "./php/Application.php";
 Application::init();
 Application::assert_logged_in();
 
-$db = new Database();
-$ur = new UserRepository($db);
+$ur = Application::context()->user_repository;
 
 $users = $ur->getUsersAlphabetically();
 

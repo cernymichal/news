@@ -9,9 +9,8 @@ if (empty($_GET["id"])) {
   die();
 }
 
-$db = new Database();
-$cr = new CategoryRepository($db);
-$ar = new ArticleRepository($db);
+$cr = Application::context()->category_repository;
+$ar = Application::context()->article_repository;
 
 if (!empty($ar->getArticlesCategory($_GET["id"]))) {
   $message = "Kategorie má stále články!";
