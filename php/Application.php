@@ -51,10 +51,10 @@ class Application
 
     public static function logged_in()
     {
-        if(isset($_SESSION["user"])) {
+        if (isset($_SESSION["user"])) {
             $user = self::context()->user_repository->getUser($_SESSION["user"]["id"]);
 
-            if(empty($user)) {
+            if (empty($user)) {
                 self::logout();
                 return false;
             }
@@ -79,6 +79,14 @@ class Application
     public static function assert_logged_in($redirect_address = "index.php")
     {
         if (!self::logged_in()) {
+            header("Location: $redirect_address");
+            die();
+        }
+    }
+
+    public static function assert_admin($redirect_address = "index.php")
+    {
+        if (!self::admin()) {
             header("Location: $redirect_address");
             die();
         }

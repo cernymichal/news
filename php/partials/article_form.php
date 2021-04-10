@@ -3,7 +3,7 @@
 if (empty($article)) {
   $article = [
     "title" => "",
-    "user_id" => "",
+    "user_id" => Application::user()["id"],
     "published" => 0,
     "categories" => [],
     "perex" => "",
@@ -23,7 +23,7 @@ $categories = Application::context()->category_repository->getCategories();
   </div>
   <div class="form-group">
     <label for="inputUser">Autor *</label>
-    <select id="inputUser" class="form-control" name="user_id" required>
+    <select id="inputUser" class="form-control" name="user_id" required <?= !Application::admin() ? "disabled" : "" ?>>
       <?php foreach ($users as $user) : ?>
         <option value="<?= $user["id"] ?>" <?= $article["user_id"] == $user["id"] ? "selected" : "" ?>><?= $user["name"] ?></option>
       <?php endforeach; ?>
@@ -70,9 +70,8 @@ $categories = Application::context()->category_repository->getCategories();
 
 <?php
 
-$ckeditor_scripts = '
+$scripts .= '
   <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>
   <script src="js/create-article-editors.js"></script>
+  <script src="js/submit-disabled.js"></script>
 ';
-
-$scripts = empty($scripts) ? $ckeditor_scripts : $scripts . $ckeditor_scripts;

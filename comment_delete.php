@@ -18,7 +18,13 @@ if (empty($comment)) {
   die();
 }
 
-$cr->deleteComment($_GET["id"]);
+$article = Application::context()->article_repository->getArticle($comment["article_id"]);
+
+if ($article["user_id"] != Application::user()["id"]) {
+  Application::assert_admin("article_administration.php");
+}
+
+$cr->deleteComment($comment["id"]);
 
 header("Location: article_comments.php?id=" . $comment["article_id"]);
 die();

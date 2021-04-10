@@ -9,6 +9,11 @@ if (isset($_POST["user_id"], $_POST["title"], $_POST["perex"], $_POST["text"])) 
 
   $_POST["published"] = isset($_POST["published"]) ? 1 : 0;
   $_POST["categories"] = empty($_POST["categories"]) ? [] : $_POST["categories"];
+
+  if (!Application::admin()) {
+    $_POST["user_id"] = Application::user()["id"];
+  }
+
   $ar->addArticle($_POST["user_id"], $_POST["title"], $_POST["perex"], $_POST["text"], $_POST["published"], $_POST["categories"]);
 
   header("Location: article_administration.php");

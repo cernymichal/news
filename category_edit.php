@@ -3,25 +3,26 @@
 require_once "./php/Application.php";
 Application::init();
 Application::assert_logged_in();
+Application::assert_admin("category_administration.php");
 
 if (empty($_GET["id"])) {
-  header("Location: index.php");
+  header("Location: category_administration.php");
   die();
 }
 
 $cr = Application::context()->category_repository;
 
-if (isset($_POST["name"])) {
-  $cr->editCategory($_GET["id"], $_POST["name"]);
+$category = $cr->getCategory($_GET["id"]);
 
+if (empty($category)) {
   header("Location: category_administration.php");
   die();
 }
 
-$category = $cr->getCategory($_GET["id"]);
+if (isset($_POST["name"])) {
+  $cr->editCategory($_GET["id"], $_POST["name"]);
 
-if ($category === false) {
-  header("Location: index.php");
+  header("Location: category_administration.php");
   die();
 }
 

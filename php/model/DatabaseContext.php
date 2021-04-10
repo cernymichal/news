@@ -17,13 +17,13 @@ class DatabaseContext
     {
         if (!isset($this->{$name})) {
             switch ($name) {
-                case 'article_repository':
+                case "article_repository":
                     $this->article_repository = new ArticleRepository($this->database);
-                case 'category_repository':
+                case "category_repository":
                     $this->category_repository = new CategoryRepository($this->database);
-                case 'comment_repository':
+                case "comment_repository":
                     $this->comment_repository = new CommentRepository($this->database);
-                case 'user_repository':
+                case "user_repository":
                     $this->user_repository = new UserRepository($this->database);
             }
         }

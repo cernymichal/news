@@ -11,7 +11,18 @@ if (empty($_GET["id"])) {
 
 $ar = Application::context()->article_repository;
 
-$ar->deleteArticle($_GET["id"]);
+$article = $ar->getArticle($_GET["id"]);
+
+if (empty($article)) {
+  header("Location: article_administration.php");
+  die();
+}
+
+if ($article["user_id"] != Application::user()["id"]) {
+  Application::assert_admin("article_administration.php");
+}
+
+$ar->deleteArticle($article["id"]);
 
 header("Location: article_administration.php");
 die();

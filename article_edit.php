@@ -5,25 +5,34 @@ Application::init();
 Application::assert_logged_in();
 
 if (empty($_GET["id"])) {
-  header("Location: index.php");
+  header("Location: article_administration.php");
   die();
 }
 
 $ar = Application::context()->article_repository;
 
-if (isset($_POST["user_id"], $_POST["title"], $_POST["perex"], $_POST["text"])) {
-  $_POST["published"] = isset($_POST["published"]) ? 1 : 0;
-  $_POST["categories"] = empty($_POST["categories"]) ? [] : $_POST["categories"];
-  $ar->editArticle($_GET["id"], $_POST["user_id"], $_POST["title"], $_POST["perex"], $_POST["text"], $_POST["published"], $_POST["categories"]);
+$article = $ar->getArticle($_GET["id"]);
 
+if (empty($article)) {
   header("Location: article_administration.php");
   die();
 }
 
-$article = $ar->getArticle($_GET["id"]);
+if ($article["user_id"] != Application::user()["id"]) {
+  Application::assert_admin("article_administration.php");
+}
 
-if ($article === false) {
-  header("Location: index.php");
+if (isset($_POST["user_id"], $_POST["title"], $_POST["perex"], $_POST["text"])) {
+  $_POST["published"] = isset($_POST["published"]) ? 1 : 0;
+  $_POST["categories"] = empty($_POST["categories"]) ? [] : $_POST["categories"];
+
+  if (!Application::admin()) {
+    $_POST["user_id"] = Application::user()["id"];
+  }
+
+  $ar->editArticle($article["id"], $_POST["user_id"], $_POST["title"], $_POST["perex"], $_POST["text"], $_POST["published"], $_POST["categories"]);
+
+  header("Location: article_administration.php");
   die();
 }
 

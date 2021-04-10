@@ -16,7 +16,7 @@
 
   <?php
 
-  foreach(empty($modals) ? [] : $modals as $modal) {
+  foreach($modals as $modal) {
     include $modal;
   }
   
@@ -28,7 +28,7 @@
 
   <script src="js/clean-blog.js"></script>
   
-  <?= empty($scripts) ? "" : $scripts ?>
+  <?= $scripts ?>
 </body>
 
 </html>

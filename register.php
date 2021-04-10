@@ -32,8 +32,8 @@ include "./php/partials/user_form.php";
 
 if (!empty($error)) {
   $error_message = $error;
-  $modals = ["./php/partials/modals/error_message.php"];
-  $scripts = '<script>MicroModal.show("modal-error-message");</script>';
+  $modals[] = "./php/partials/modals/error_message.php";
+  $scripts .= '<script>MicroModal.show("modal-error-message");</script>';
 }
 
 include "./php/partials/document_end.php";

@@ -44,38 +44,42 @@ class UserRepository extends BaseRepository
         return $this->db->selectSingle($sql, $params);
     }
 
-    public function addUser($email, $password, $name)
+    public function addUser($email, $password, $name, $admin)
     {
         $sql = "
             insert into user
             set
                 email = :email,
                 password = :password,
-                name = :name
+                name = :name,
+                admin = :admin
         ";
         $params = [
             ":email" => $email,
             ":password" => password_hash($password, PASSWORD_DEFAULT),
-            ":name" => $name
+            ":name" => $name,
+            ":admin" => $admin
         ];
 
         return $this->db->insert($sql, $params);
     }
 
-    public function editUser($id, $email, $password, $name)
+    public function editUser($id, $email, $password, $name, $admin)
     {
         $sql = "
             update user
             set
                 email = :email,
                 " . (empty($password) ? "" : "password = :password,") . "
-                name = :name
+                name = :name,
+                admin = :admin
             where id = :id
         ";
         $params = [
             ":id" => $id,
             ":email" => $email,
-            ":name" => $name
+            ":name" => $name,
+            ":admin" => $admin
         ];
 
         if (!empty($password)) {

@@ -13,7 +13,7 @@ $cr = Application::context()->comment_repository;
 
 $article = $ar->getArticle($_GET["id"]);
 
-if ($article === false) {
+if (empty($article)) {
   header("Location: index.php");
   die();
 }

@@ -1,3 +1,10 @@
+<?php
+
+$modals = [];
+$scripts = "";
+
+?>
+
 <!DOCTYPE html>
 <html lang="cs">
 

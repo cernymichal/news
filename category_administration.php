@@ -32,8 +32,10 @@ include "./php/partials/document_start.php";
       <tr>
         <td><?= $category["name"] ?></td>
         <td>
-          <a class="btn btn-primary w-100 px-0" href="<?= "category_edit.php?id=" . $category["id"] ?>">Upravit</a>
-          <a class="btn btn-danger w-100 px-0" href="<?= "category_delete.php?id=" . $category["id"] ?>">Odstranit</a>
+          <?php if (Application::admin()) : ?>
+            <a class="btn btn-primary w-100 px-0" href="<?= "category_edit.php?id=" . $category["id"] ?>">Upravit</a>
+            <a class="btn btn-danger w-100 px-0" href="<?= "category_delete.php?id=" . $category["id"] ?>">Odstranit</a>
+          <?php endif; ?>
         </td>
       </tr>
     <?php endforeach; ?>
@@ -44,8 +46,8 @@ include "./php/partials/document_start.php";
 
 if (!empty($_GET["error"])) {
   $error_message = $_GET["error"];
-  $modals = ["./php/partials/modals/error_message.php"];
-  $scripts = '<script>MicroModal.show("modal-error-message");</script>';
+  $modals[] = "./php/partials/modals/error_message.php";
+  $scripts .= '<script>MicroModal.show("modal-error-message");</script>';
 }
 
 include "./php/partials/document_end.php";

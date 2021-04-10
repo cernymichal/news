@@ -38,10 +38,10 @@ include "./php/partials/document_start.php";
   </div>
   <div class="row">
     <div class="col-6">
-      <button type="submit" class="btn btn-primary">Přihlásit se</button>
+      <a class="btn btn-success" href="register.php">Registrovat se</a>
     </div>
     <div class="col-6 text-right">
-      <a class="btn btn-success" href="register.php">Registrovat se</a>
+      <button type="submit" class="btn btn-primary">Přihlásit se</button>
     </div>
   </div>
 </form>
@@ -50,8 +50,8 @@ include "./php/partials/document_start.php";
 
 if (!empty($error)) {
   $error_message = $error;
-  $modals = ["./php/partials/modals/error_message.php"];
-  $scripts = '<script>MicroModal.show("modal-error-message");</script>';
+  $modals[] = "./php/partials/modals/error_message.php";
+  $scripts .= '<script>MicroModal.show("modal-error-message");</script>';
 }
 
 include "./php/partials/document_end.php";

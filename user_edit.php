@@ -5,23 +5,29 @@ Application::init();
 Application::assert_logged_in();
 
 if (empty($_GET["id"])) {
-  header("Location: index.php");
+  header("Location: user_administration.php");
   die();
 }
 
 $ur = Application::context()->user_repository;
 
-if (isset($_POST["email"], $_POST["password"], $_POST["name"])) {
-  $ur->editUser($_GET["id"], $_POST["email"], $_POST["password"], $_POST["name"]);
+$user = $ur->getUser($_GET["id"]);
 
+if (empty($user)) {
   header("Location: user_administration.php");
   die();
 }
 
-$user = $ur->getUser($_GET["id"]);
+if ($user["id"] != Application::user()["id"]) {
+  Application::assert_admin("user_administration.php");
+}
 
-if ($user === false) {
-  header("Location: index.php");
+if (isset($_POST["email"], $_POST["password"], $_POST["name"])) {
+  $_POST["admin"] = isset($_POST["admin"]) && Application::admin() ? 1 : 0;
+
+  $ur->editUser($user["id"], $_POST["email"], $_POST["password"], $_POST["name"], $_POST["admin"]);
+
+  header("Location: user_administration.php");
   die();
 }
 

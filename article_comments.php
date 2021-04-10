@@ -5,13 +5,22 @@ Application::init();
 Application::assert_logged_in();
 
 if (empty($_GET["id"])) {
-  header("Location: index.php");
+  header("Location: article_adminstration.php");
   die();
 }
 
-$cr = Application::context()->comment_repository;
+$article = Application::context()->article_repository->getArticle($_GET["id"]);
 
-$comments = $cr->getCommentsArticle($_GET["id"]);
+if (empty($article)) {
+  header("Location: article_adminstration.php");
+  die();
+}
+
+if ($article["user_id"] != Application::user()["id"]) {
+  Application::assert_admin("article_administration.php");
+}
+
+$comments = Application::context()->comment_repository->getCommentsArticle($article["id"]);
 
 $title = "Články - Administrace";
 $heading = "Administrace komentářů";
